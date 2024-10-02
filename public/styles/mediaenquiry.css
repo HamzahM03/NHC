@@ -1,0 +1,11 @@
+@media (max-width:1200px){
+  #webpage-nav{
+    display: none;
+  }
+  #hamburger-nav{
+    display: flex;
+  }
+
+}
+
+
