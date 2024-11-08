@@ -1,0 +1,88 @@
+body {
+  background-color: #1c1c1c;
+  color: #ffffff;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.form-container {
+  background-color: #2b2b2b;
+  border: 1px solid #555;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  margin: 0 auto;
+}
+
+.form-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #00ff00;
+}
+
+/* Input Styles (Consistent for Both Types) */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 10px 40px 10px 10px;
+  margin-bottom: 15px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #1c1c1c;
+  color: #00ff00;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.password-container {
+  position: relative;
+}
+
+.toggle-password-eye {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #00ff00;
+  color: #1c1c1c;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #00cc00;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+
+
+/* LOGIN FORM */
+
+.toggle-password-eye{
+  display: inline;
+  height:15px;
+  width:15px;
+  margin-left:-1.5%;
+  vertical-align:middle;
+}

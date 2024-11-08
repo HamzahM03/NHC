@@ -83,6 +83,26 @@ text-decoration: none;
   font-size:larger;
 }
 
+#auth-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size:1.5rem;
+  gap:5px;
+}
+
+#auth-container a{
+  text-decoration: none;
+  color:white;
+}
+
+#auth-container a:hover{
+  text-decoration: underline;
+  color:grey;
+  text-underline-offset: 10px;
+
+}
+
 
 /*HAMBURGER MENU*/
 #hamburger-nav{
@@ -159,3 +179,12 @@ opacity: 0;
 }
   
 
+/* LOGIN FORM */
+
+.toggle-password-eye{
+  display: inline;
+  height:1%;
+  width:1%;
+  margin-left:-1.5%;
+  vertical-align:middle;
+}
