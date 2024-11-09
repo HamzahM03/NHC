@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/styles/dashboard.css">
+</head>
+<body>
+  <div class="navbar">
+    <h1>Admin Dashboard</h1>
+    <ul class="nav-tabs">
+      <li><a id="tab-parents" class="active" href="/parents" >Parents</a></li>
+      <li><a id="tab-clients" href="/clients">Clients</a></li>
+      <li><a id="tab-expenses" href="/expenses">Expenses</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <!-- Parents Section -->
+    <div id="parents-section" class="tab-content active">
+      <h2>Parents</h2>
+      <button onclick="addParent()">Add Parent</button>
+      <table>
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="parents-table">
+          <!-- Populate with data dynamically -->
+          <% if (parents.length > 0) { %>
+            <% parents.forEach(parent => { %>
+              <tr>
+                <td><%= parent.first_name %></td>
+                <td><%= parent.last_name %></td>
+                <td><%= parent.email %></td>
+                <td><%= parent.phone_number %></td>
+                <td><%= parent.address %></td>
+                <td>
+                  <button onclick="toggleDetails('<%= parent.email %>')">⬇ Expand</button>
+                  <button onclick="editParent('<%= parent.email %>')">Edit</button>
+                  <button onclick="deleteParent('<%= parent.email %>')">Delete</button>
+                </td>
+                <tr id="details-<%= parent.email %>" class="details-row" style="display: none;">
+                  <td colspan="6">
+                    <strong>Last Updated:</strong> <%= new Date(parent.updated_at).toLocaleString() %><br>
+                    
+                    <strong>Emergency Contact:</strong> <%= parent.emergency_contact.name %> <br>
+                    <strong>Phone Number:</strong>  <%= parent.emergency_contact.phone %><br>
+                    <strong>Relationship:</strong> <%= parent.emergency_contact.relationship %><br>
+                    <strong>Address:</strong> <%= parent.emergency_contact.address %><br>
+                    <strong>Children:</strong>
+                    <ul>
+                      <% if (parent.children && parent.children.length > 0) { %>
+                        <% parent.children.forEach(child => { %>
+                          <li><%= child.first_name %> <%= child.last_name %></li>
+                        <% }) %>
+                      <% } else { %>
+                        <li>No children enrolled</li>
+                      <% } %>
+                    </ul>
+                  </td>
+                </tr>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="5">No parents found.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+
+
+  <script src="/JS/dashboard.js"></script>
+</body>
+</html>

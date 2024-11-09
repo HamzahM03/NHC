@@ -43,13 +43,99 @@ db.connect();
 
 app.use(express.static("public"));
 
+//Home Page / Login page for admin
 app.get("/", (req,res)=>{
 
   res.render("index.ejs");
-})
+});
+
+app.get("/clients", (req,res)=>{
+  res.render("clients.ejs");
+});
+
+app.get("/expenses", (req,res)=>{
+  res.render("expenses.ejs");
+});
+
+app.get("/parents", async (req, res) => {
+  try {
+    // Query to fetch parents along with emergency contacts and children's names
+    const result = await db.query(`
+      SELECT
+        p.parent_id,
+        p.first_name AS parent_first_name,
+        p.last_name AS parent_last_name,
+        p.email,
+        p.phone_number,
+        p.address,
+        p.updated_at,
+        ec.contact_name AS emergency_contact_name,
+        ec.contact_relationship,
+        ec.contact_phone AS emergency_contact_phone,
+        ec.contact_address AS emergency_contact_address,
+        ec.contact_email AS emergency_contact_email,
+        c.child_id,
+        c.first_name AS child_first_name,
+        c.last_name AS child_last_name
+      FROM parent p
+      LEFT JOIN emergency_contact ec ON p.parent_id = ec.parent_id
+      LEFT JOIN child c ON p.parent_id = c.parent_id
+      ORDER BY p.updated_at DESC;
+    `);
+
+    const rows = result.rows;
+
+    // Organize parents, children, and emergency contacts
+    const parentsMap = {};
+    rows.forEach(row => {
+      const parentId = row.parent_id;
+
+      // Check if we already created a parent entry
+      if (!parentsMap[parentId]) {
+        parentsMap[parentId] = {
+          parent_id: row.parent_id,
+          first_name: row.parent_first_name,
+          last_name: row.parent_last_name,
+          email: row.email,
+          phone_number: row.phone_number,
+          address: row.address,
+          updated_at: row.updated_at,
+          emergency_contact: {
+            name: row.emergency_contact_name,
+            relationship: row.contact_relationship,
+            phone: row.emergency_contact_phone,
+            address: row.emergency_contact_address,
+            email: row.emergency_contact_email,
+          },
+          children: []
+        };
+      }
+
+      // Add child if exists
+      if (row.child_id) {
+        parentsMap[parentId].children.push({
+          child_id: row.child_id,
+          first_name: row.child_first_name,
+          last_name: row.child_last_name,
+        });
+      }
+    });
+
+    // Convert parentsMap to an array
+    const parents = Object.values(parentsMap);
+    console.log(parents);
+
+    // Render dashboard with parents data
+    res.render("parents.ejs", { parents });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    req.flash("error", "Failed to load data");
+    res.redirect("/");
+  }
+});
 
 
-
+//Admin Page 
 app.post("/admin", async (req, res) => {
   const email_attempt = req.body["email"];
   const password_attempt = req.body["password"];

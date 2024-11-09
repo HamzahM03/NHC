@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/styles/dashboard.css">
+</head>
+<body>
+  <div class="navbar">
+    <h1>Admin Dashboard</h1>
+    <ul class="nav-tabs">
+      <li><a id="tab-parents"  href="/parents">Parents</a></li>
+      <li><a id="tab-clients" href="/clients" >Clients</a></li>
+      <li><a id="tab-expenses"  class="active" href="/expenses">Expenses</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+ 
+    <!-- Expenses Section -->
+    <div id="expenses-section" class="tab-content active">
+      <h2>Expenses</h2>
+      <button onclick="addExpense()">Add Expense</button>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="expenses-table">
+          <!-- Populate with data dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="/JS/dashboard.js"></script>
+</body>
+</html>
