@@ -57,6 +57,8 @@ app.get("/expenses", (req,res)=>{
   res.render("expenses.ejs");
 });
 
+
+
 app.get("/parents", async (req, res) => {
   try {
     // Query to fetch parents along with emergency contacts and children's names
@@ -82,6 +84,8 @@ app.get("/parents", async (req, res) => {
       LEFT JOIN child c ON p.parent_id = c.parent_id
       ORDER BY p.updated_at DESC;
     `);
+
+    
 
     const rows = result.rows;
 
@@ -123,7 +127,7 @@ app.get("/parents", async (req, res) => {
 
     // Convert parentsMap to an array
     const parents = Object.values(parentsMap);
-    console.log(parents);
+    
 
     // Render dashboard with parents data
     res.render("parents.ejs", { parents });
@@ -131,6 +135,31 @@ app.get("/parents", async (req, res) => {
     console.error("Error fetching data:", error);
     req.flash("error", "Failed to load data");
     res.redirect("/");
+  }
+});
+
+app.get("/add-child", (req, res) => {
+  const { parent_id } = req.query;
+  res.render("add-child.ejs", { parent_id });
+});
+
+app.post("/add-child", async (req, res) => {
+  const { parent_id, first_name, last_name, date_of_birth, description } = req.body;
+
+  try {
+    // Insert the new child into the child table
+    await db.query(
+      `INSERT INTO child (parent_id, first_name, last_name, date_of_birth, description) 
+       VALUES ($1, $2, $3, $4, $5)`,
+      [parent_id, first_name, last_name, date_of_birth, description]
+    );
+
+    req.flash("success", "Child added successfully");
+    res.redirect("/parents");
+  } catch (error) {
+    console.error("Error adding child:", error);
+    req.flash("error", "Failed to add child. Please try again.");
+    res.redirect(`/add-child?parent_id=${parent_id}`);
   }
 });
 

@@ -47,6 +47,9 @@
                   <button onclick="toggleDetails('<%= parent.email %>')">⬇ Expand</button>
                   <button onclick="editParent('<%= parent.email %>')">Edit</button>
                   <button onclick="deleteParent('<%= parent.email %>')">Delete</button>
+                  <td><a href="/add-child?parent_id=<%= parent.parent_id %>">Add Child</a></td>
+
+
                 </td>
                 <tr id="details-<%= parent.email %>" class="details-row" style="display: none;">
                   <td colspan="6">
@@ -56,6 +59,7 @@
                     <strong>Phone Number:</strong>  <%= parent.emergency_contact.phone %><br>
                     <strong>Relationship:</strong> <%= parent.emergency_contact.relationship %><br>
                     <strong>Address:</strong> <%= parent.emergency_contact.address %><br>
+                    <strong>Email:</strong> <%= parent.emergency_contact.email %><br>
                     <strong>Children:</strong>
                     <ul>
                       <% if (parent.children && parent.children.length > 0) { %>
