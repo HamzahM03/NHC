@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const sessionSchema = new mongoose.Schema({
     date: { type: Date, required: true, default: Date.now },
     kidsAttended: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Kid' }]
 });
 
-module.exports = mongoose.model('Session', sessionSchema);
+const Session = mongoose.model('Session', sessionSchema);
+export default Session;

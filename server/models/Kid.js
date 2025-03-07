@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const kidSchema = new mongoose.Schema({
     name: { type: String, required: true },
@@ -14,4 +14,5 @@ const kidSchema = new mongoose.Schema({
     ]
 });
 
-module.exports = mongoose.model('Kid', kidSchema);
+const Kid = mongoose.model('Kid', kidSchema);
+export default Kid;

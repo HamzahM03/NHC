@@ -1,11 +1,12 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const paymentSchema = new mongoose.Schema({
     kidId: { type: mongoose.Schema.Types.ObjectId, ref: 'Kid', required: true },
     amountPaid: { type: Number, required: true },
-    paymentType: { type: String, enum: ['cash', 'card', 'venmo', 'other'], required: true },
+    paymentType: { type: String, enum: ['cash', 'zelle'], required: true },
     date: { type: Date, default: Date.now },
-    sessionsAdded: { type: Number, default: 0 } // 0 = single session, 4 = package, 8 = package
+    sessionsAdded: { type: Number, default: 0 }
 });
 
-module.exports = mongoose.model('Payment', paymentSchema);
+const Payment = mongoose.model('Payment', paymentSchema);
+export default Payment;
