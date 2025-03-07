@@ -1,6 +1,7 @@
 import express from 'express';
 import connectDB from './config/db.js';
 import dotenv from 'dotenv';
+import kidRoutes from "./routes/kidRoutes.js"; // Import routes
 
 dotenv.config(); // Load environment variables
 
@@ -11,6 +12,9 @@ connectDB();
 
 // Middleware
 app.use(express.json());
+
+// Routes
+app.use("/api/kids", kidRoutes); // Route for kids management
 
 app.get('/', (req, res) => {
     res.send('API is running...');
