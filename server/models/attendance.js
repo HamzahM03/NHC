@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const attendanceSchema = new mongoose.Schema({
   participant: { type: mongoose.Schema.Types.ObjectId, ref: 'Participant', required: true },
@@ -8,4 +8,7 @@ const attendanceSchema = new mongoose.Schema({
   notes: { type: String, trim: true },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Attendance', attendanceSchema);
+
+const Attendance = mongoose.model('Attendance', attendanceSchema);
+export default Attendance;
+

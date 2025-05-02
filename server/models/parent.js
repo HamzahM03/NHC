@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const parentSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
@@ -9,4 +9,6 @@ const parentSchema = new mongoose.Schema({
   emergencyContact: { type: String, required: true, trim: true },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Parent', parentSchema);
+
+const Parent = mongoose.model('Parent', parentSchema);
+export default Parent;

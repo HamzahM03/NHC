@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const sessionPackageSchema = new mongoose.Schema({
   participant: { type: mongoose.Schema.Types.ObjectId, ref: 'Participant', required: true },
@@ -9,4 +9,6 @@ const sessionPackageSchema = new mongoose.Schema({
   registeredBy: { type: String, trim: true },
 }, { timestamps: true });
 
-module.exports = mongoose.model('SessionPackage', sessionPackageSchema);
+
+const SessionPackage = mongoose.model('SessionPackage', sessionPackageSchema);
+export default SessionPackage;

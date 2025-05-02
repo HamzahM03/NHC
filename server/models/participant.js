@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 const participantSchema = new mongoose.Schema({
   firstName: { type: String, required: true, trim: true },
   lastName: { type: String, required: true, trim: true },
@@ -9,4 +8,6 @@ const participantSchema = new mongoose.Schema({
   notes: { type: String, trim: true },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Participant', participantSchema);
+
+const Participant = mongoose.model('Participant', participantSchema);
+export default Participant;
