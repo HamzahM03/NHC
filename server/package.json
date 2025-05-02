@@ -5,17 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon app.js",
-    "test":  "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "jest": {
-  "testEnvironment": "node"
-},
+    "testEnvironment": "node"
+  },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "joi": "^17.13.3",
     "mongoose": "^8.13.2"
   },
   "devDependencies": {
